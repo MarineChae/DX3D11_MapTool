@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <FxCompile Include="..\..\Resource\FBXObject.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\MultiTex.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\ShadowObject.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\SkyBox.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\Resource\WaterMap.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="InstanceObject.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="ProJectionShadow.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="CFbxExporter.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="MyFbxImport.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="CModelMgr.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="MapObject.cpp">
+      <Filter>FBX</Filter>
+    </ClCompile>
+    <ClCompile Include="Select.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLoader.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="RedoUndo.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterMap.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMap.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="CMap.cpp">
+      <Filter>SpaceDivision</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeightMap.cpp">
+      <Filter>SpaceDivision</Filter>
+    </ClCompile>
+    <ClCompile Include="CNode.cpp">
+      <Filter>SpaceDivision</Filter>
+    </ClCompile>
+    <ClCompile Include="CQuadTree.cpp">
+      <Filter>SpaceDivision</Filter>
+    </ClCompile>
+    <ClCompile Include="MapLOD.cpp">
+      <Filter>Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InstanceObject.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="ProJectionShadow.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="CFbxExporter.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="MyFbxImport.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="CModelMgr.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="MapObject.h">
+      <Filter>FBX</Filter>
+    </ClInclude>
+    <ClInclude Include="Select.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveLoader.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="RedoUndo.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="WaterMap.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMap.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="CMap.h">
+      <Filter>SpaceDivision</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeightMap.h">
+      <Filter>SpaceDivision</Filter>
+    </ClInclude>
+    <ClInclude Include="CNode.h">
+      <Filter>SpaceDivision</Filter>
+    </ClInclude>
+    <ClInclude Include="CQuadTree.h">
+      <Filter>SpaceDivision</Filter>
+    </ClInclude>
+    <ClInclude Include="MapLOD.h">
+      <Filter>Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Detail">
+      <UniqueIdentifier>{9a718d1d-9e13-405f-bcf6-b6971e7f9681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FBX">
+      <UniqueIdentifier>{34eb3ca7-3c1e-4f7b-b898-52529e4e6a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{f6b6d8a1-20a5-4bd0-a04d-0ecdb1d2506c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{ffdead34-baff-49af-a6cf-f17a47089472}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpaceDivision">
+      <UniqueIdentifier>{3a9a1e49-5247-46b4-a70c-7a9db245e895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{bc964393-5749-4bc7-8afd-911829a6a0d4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
