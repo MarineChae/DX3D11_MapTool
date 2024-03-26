@@ -7,7 +7,7 @@
 
 bool MapToolScene::Init()
 {
-
+	CWriter::GetInstance().m_bValid = false;
 	m_pSkyBox = make_shared<SkyBox>();
 	m_pSkyBox->Init();
 	m_pHeightMap = make_shared<CHeightMap>();
@@ -33,7 +33,7 @@ bool MapToolScene::Init()
 
 
 	std::shared_ptr<CFbxObj> loadobj = CModelMgr::GetInstance().Load(L"../../Resource/MultiCameras.FBX");
-	std::shared_ptr<CFbxObj> loadobj2 = CModelMgr::GetInstance().Load(L"../../Resource/Slowpoke.FBX");
+	std::shared_ptr<CFbxObj> loadobj2 = CModelMgr::GetInstance().Load(L"../../Resource/humanoid.FBX");
 	std::shared_ptr<CFbxObj> loadobj3 = CModelMgr::GetInstance().Load(L"../../Resource/Turret_Deploy1.FBX");
 	std::shared_ptr<CFbxObj> loadobj5 = CModelMgr::GetInstance().Load(L"../../Resource/pm0132_00.FBX");
 	std::shared_ptr<CFbxObj> loadobj4 = CModelMgr::GetInstance().Load(L"../../Resource/BlackCow.fbx");
@@ -99,7 +99,6 @@ bool MapToolScene::Frame()
 
 
 	SaveLoad(); 
-	DebugCameraData();
 	m_Select.SetMatrix(nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
 	m_pQuadTree->Frame(&m_Select);
 	m_RedoUndo.Frame(m_pHeightMap, m_InstanceObjList);
@@ -419,7 +418,14 @@ void MapToolScene::SaveLoad()
 				OpenSave = true;
 			
 			}
-			
+			if (ImGui::MenuItem("Debug", NULL))
+			{
+				if(CWriter::GetInstance().m_bValid)
+					CWriter::GetInstance().m_bValid = false;
+				else
+					CWriter::GetInstance().m_bValid = true;
+
+			}
 
 			ImGui::EndMenu();
 		}
@@ -642,11 +648,11 @@ void MapToolScene::SelectMenu()
 				m_pQuadTree->m_BrushType = BrushType::DOWNBRUSH;
 
 			}ImGui::SameLine();
-			if (ImGui::RadioButton("SMOOTH", (m_pQuadTree->m_BrushType == BrushType::SMOOTHBRUSH)))
-			{
-				m_pQuadTree->m_BrushType = BrushType::SMOOTHBRUSH;
+			//if (ImGui::RadioButton("SMOOTH", (m_pQuadTree->m_BrushType == BrushType::SMOOTHBRUSH)))
+			//{
+			//	m_pQuadTree->m_BrushType = BrushType::SMOOTHBRUSH;
 
-			}ImGui::SameLine();
+			//}ImGui::SameLine();
 			if (ImGui::RadioButton("None", (m_pQuadTree->m_BrushType == BrushType::NONE)))
 			{
 				m_pQuadTree->m_BrushType = BrushType::NONE;
