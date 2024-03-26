@@ -49,7 +49,7 @@ public:
 	std::shared_ptr<CQuadTree>			     m_pQuadTree = nullptr;
 	std::shared_ptr<SkyBox>				     m_pSkyBox;
 	RenderTarget							m_RT;
-	WaterMap								m_WaterMap;
+	WaterMap*								m_pWaterMap;
 	float									m_fWaterHeight= 10.0f;
 	
 	

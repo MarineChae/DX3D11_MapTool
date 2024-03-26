@@ -11,7 +11,7 @@ bool MapToolScene::Init()
 	m_pSkyBox = make_shared<SkyBox>();
 	m_pSkyBox->Init();
 	m_pHeightMap = make_shared<CHeightMap>();
-	m_pHeightMap->Init();
+	m_pHeightMap->Init(L"../../Resource/heightmap.bmp", 0);
 	m_pDebugCamera = std::make_shared<CDebugCamera>();
 	m_pDebugCamera->PerspectiveFovLH(1.0f, 1000.f, PI * 0.25, (float)gWindow_Width / (float)gWindow_Height);
 	m_pDebugCamera->ViewLookAtLH({ 0,200,-50 }, { 0,0,1 }, { 0,1,0 });
@@ -20,14 +20,14 @@ bool MapToolScene::Init()
 	m_pQuadTree->BuildQuadTree(m_pHeightMap, m_pHeightMap->m_iRow, m_pHeightMap->m_iCol, m_pHeightMap->m_vVertexList);
 	m_RedoUndo.Init(m_pQuadTree);
 
-
-	m_WaterMap.Init();
+	m_pWaterMap = new WaterMap;
+	m_pWaterMap->Init();
 	CMapDesc WaterMapDesc = { m_pHeightMap->m_iRow,
 		m_pHeightMap->m_iCol,
 		1.0f, 0.0f,
 		L"../../Resource/water.bmp",
 		L"../../Resource/WaterMap.hlsl" };
-	m_WaterMap.Load(WaterMapDesc);
+	m_pWaterMap->Load(WaterMapDesc);
 
 
 
@@ -202,32 +202,36 @@ bool MapToolScene::Frame()
 	
 
 
-	CoreInterface::g_pImmediateContext.Get()->RSSetState(m_WaterMap.m_pRasterizerBackCullSolid.Get());
+	if (m_pWaterMap != nullptr)
+	{
+		CoreInterface::g_pImmediateContext.Get()->RSSetState(m_pWaterMap->m_pRasterizerBackCullSolid.Get());
 
-	TVector4 m_ClipPlaneFront = TVector4(0, 1.0f, 0, w);
-	m_Fog.g_FogColor = TVector4(0.0f, 0.0f, 0.0f, 1);
-	m_Fog.g_ClipPlane = m_ClipPlaneFront;
-	CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
-	DrawReflectMap(0, nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
+		TVector4 m_ClipPlaneFront = TVector4(0, 1.0f, 0, w);
+		m_Fog.g_FogColor = TVector4(0.0f, 0.0f, 0.0f, 1);
+		m_Fog.g_ClipPlane = m_ClipPlaneFront;
+		CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
+		DrawReflectMap(0, nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
 
-	TVector4 m_ClipPlaneBack = TVector4(0, -1.0f, 0, -w);
-	m_Fog.g_ClipPlane = m_ClipPlaneBack;
-	CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
-	DrawReflectMap(1, nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
+		TVector4 m_ClipPlaneBack = TVector4(0, -1.0f, 0, -w);
+		m_Fog.g_ClipPlane = m_ClipPlaneBack;
+		CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
+		DrawReflectMap(1, nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
+
+		CoreInterface::g_pImmediateContext.Get()->RSSetState(m_pWaterMap->m_pRasterizerCullNoneSolid.Get());
+		TMatrix matReflectView;
+		D3DXMatrixIdentity(&matReflectView);
+		TPlane p = TPlane(0.0f, 1.0f, 0.0f, w);
+		D3DXMatrixReflect(&matReflectView, &p);
+		TMatrix matView = CoreInterface::g_pMainCamera->m_ViewMatrix;
+		D3DXMatrixMultiply(&matReflectView, &matReflectView, &matView);
+		m_Fog.g_ClipPlane = TVector4(0, 1.0f, 0, w);
+		CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
+		DrawReflectMap(2, nullptr, &matReflectView, &CoreInterface::g_pMainCamera->m_ProjMatrix);
+
+
+
+	}
 	
-	CoreInterface::g_pImmediateContext.Get()->RSSetState(m_WaterMap.m_pRasterizerCullNoneSolid.Get());
-	TMatrix matReflectView;
-	D3DXMatrixIdentity(&matReflectView);
-	TPlane p = TPlane(0.0f, 1.0f, 0.0f, w);
-	D3DXMatrixReflect(&matReflectView, &p);
-	TMatrix matView = CoreInterface::g_pMainCamera->m_ViewMatrix;
-	D3DXMatrixMultiply(&matReflectView, &matReflectView, &matView);
-	m_Fog.g_ClipPlane = TVector4(0, 1.0f, 0, w);
-	CoreInterface::g_pImmediateContext->UpdateSubresource(m_pFogCB.Get(), 0, NULL, &m_Fog, 0, 0);
-	DrawReflectMap(2, nullptr, &matReflectView, &CoreInterface::g_pMainCamera->m_ProjMatrix);
-
-
-
 
 
 	SelectMenu();
@@ -273,7 +277,8 @@ bool MapToolScene::Render()
 	D3DXMatrixIdentity(&matWaterWorld);
 	matWaterWorld._42 = -w;
 
-	m_WaterMap.Render(&matWaterWorld, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
+	if(m_pWaterMap != nullptr)
+	m_pWaterMap->Render(&matWaterWorld, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
 
 	
 	m_pSkyBox->SetMatrix(nullptr, &CoreInterface::g_pMainCamera->m_ViewMatrix, &CoreInterface::g_pMainCamera->m_ProjMatrix);
@@ -310,6 +315,8 @@ bool MapToolScene::Release()
 		obj.reset();
 	}
 
+	m_pWaterMap->Release();
+	m_pWaterMap = nullptr;
 	return true;
 }
 void MapToolScene::DebugCameraData()
@@ -400,23 +407,36 @@ void MapToolScene::SaveLoad()
 {
 	static bool   m_bImguiLoad = false;
 	static bool   m_bImguiSave = false;
+	static bool   m_bLoadHeight = false;
 	static bool   OpenMenu = false;
 	static bool   OpenSave = false;
 	static bool   OpenLoad = false;
+	static bool   OpenNew = false;
+	static bool   LoadHeightMap = false;
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("Menu"))
 		{
+			if (ImGui::MenuItem("New", NULL))
+			{
+				OpenNew = true;
+
+			}
 			if (ImGui::MenuItem("Load", NULL))
 			{
 				OpenLoad = true;
 
 			}
 				
-			if (ImGui::MenuItem("Save", NULL, OpenSave))
+			if (ImGui::MenuItem("Save", NULL))
 			{
 				OpenSave = true;
 			
+			}
+			if (ImGui::MenuItem("LoadHeightMap", NULL))
+			{
+				LoadHeightMap = true;
+
 			}
 			if (ImGui::MenuItem("Debug", NULL))
 			{
@@ -455,6 +475,52 @@ void MapToolScene::SaveLoad()
 		}
 
 	}
+	if (OpenNew)
+	{
+		static float Mapsize = 0;
+		ImGui::InputFloat("MapSize", &Mapsize);
+		if (ImGui::Button("Conform", ImVec2(60, 30)))
+		{
+
+			m_pHeightMap.reset();
+			m_pQuadTree.reset();
+			m_InstanceObjList.clear();
+
+			m_pHeightMap = make_shared<CHeightMap>();
+			m_pHeightMap->Init(L"", Mapsize);
+
+			m_pQuadTree = std::make_shared<CQuadTree>();
+			m_pQuadTree->BuildQuadTree(m_pHeightMap, m_pHeightMap->m_iRow, m_pHeightMap->m_iCol, m_pHeightMap->m_vVertexList);
+
+
+			m_pWaterMap = nullptr;
+			m_pWaterMap = new WaterMap;
+			m_pWaterMap->Init();
+			CMapDesc WaterMapDesc = { m_pHeightMap->m_iRow,
+				m_pHeightMap->m_iCol,
+				1.0f, 0.0f,
+				L"../../Resource/water.bmp",
+				L"../../Resource/WaterMap.hlsl" };
+			m_pWaterMap->Load(WaterMapDesc);
+
+
+			OpenNew = false;
+		}
+
+
+	}
+	if (LoadHeightMap)
+	{
+		ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File", ".png,.jpg,.bmp", ".");
+
+		// display
+		if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey", OpenSave))
+		{
+			LoadHeightMap = false;
+			m_bLoadHeight = true;
+		}
+		
+	}
 
 	std::string filePath;
 	std::string filePathName;
@@ -472,13 +538,15 @@ void MapToolScene::SaveLoad()
 	{
 		m_bImguiLoad = false;
 		m_SaveLoader.LoadMap(filePathName,m_InstanceObjList);
-		m_pHeightMap->Release();
+		m_pHeightMap.reset();
+		m_pHeightMap = make_shared<CHeightMap>();
 		m_pQuadTree->m_pTexSRV[0].Reset();
-		m_pQuadTree->Release();
+		m_pQuadTree.reset();
+		m_pQuadTree = make_shared<CQuadTree>();
 		m_InstanceObjList.clear();
-		m_pHeightMap->Init();
+		m_pHeightMap->Init(L"", m_SaveLoader.m_Mapsize[0]);
 		m_pHeightMap->m_bStaticLight = true;
-		CMapDesc MapDesc = { m_SaveLoader.m_Mapsize[0],  m_SaveLoader.m_Mapsize[1],1.0f,1.0f,m_pQuadTree->m_pTextureList[1]->m_csName,L"../../Resource/MultiTex.hlsl" };
+		CMapDesc MapDesc = { m_SaveLoader.m_Mapsize[0],  m_SaveLoader.m_Mapsize[1],1.0f,1.0f,m_SaveLoader.m_SubTexture[0].c_str(),L"../../Resource/MultiTex.hlsl"};
 		m_pHeightMap->Load(MapDesc,m_SaveLoader.m_MapHeight);
 		m_pQuadTree->BuildQuadTree(m_pHeightMap, m_pHeightMap->m_iRow, m_pHeightMap->m_iCol, m_pHeightMap->m_vVertexList);
 	
@@ -492,6 +560,7 @@ void MapToolScene::SaveLoad()
 		CTexture* tex4 = const_cast<CTexture*>(CTextureMgr::GetInstance().Load(m_SaveLoader.m_SubTexture[3]));
 		m_pQuadTree->m_pTexSRV[4] = (tex4->GetSRV());
 	
+
 		int iSize = m_pQuadTree->m_Width * m_pQuadTree->m_Height * 4;
 	
 	
@@ -569,7 +638,15 @@ void MapToolScene::SaveLoad()
 			}
 		}
 	
-	
+		m_pWaterMap=nullptr;
+		m_pWaterMap = new WaterMap;
+		m_pWaterMap->Init();
+		CMapDesc WaterMapDesc = { m_pHeightMap->m_iRow,
+			m_pHeightMap->m_iCol,
+			1.0f, 0.0f,
+			L"../../Resource/water.bmp",
+			L"../../Resource/WaterMap.hlsl" };
+		m_pWaterMap->Load(WaterMapDesc);
 	
 	
 	
@@ -581,7 +658,33 @@ void MapToolScene::SaveLoad()
 		m_SaveLoader.SaveMap(m_pQuadTree, filePathName, m_InstanceObjList);
 		CTextureMgr::GetInstance().SaveFile(m_pQuadTree->m_pTextureList[0]->m_csName.c_str(), m_pQuadTree->m_pMap->m_pRoughnessLookUpTex.Get());
 	}
+	if (m_bLoadHeight && !filePathName.empty())
+	{
+		m_pHeightMap.reset();
+		m_pQuadTree.reset();
+		m_InstanceObjList.clear();
 
+		m_pHeightMap = make_shared<CHeightMap>();
+		m_pHeightMap->Init(mtw(filePathName),0);
+
+		m_pQuadTree = std::make_shared<CQuadTree>();
+		m_pQuadTree->BuildQuadTree(m_pHeightMap, m_pHeightMap->m_iRow, m_pHeightMap->m_iCol, m_pHeightMap->m_vVertexList);
+
+
+		m_pWaterMap = nullptr;
+		m_pWaterMap = new WaterMap;
+		m_pWaterMap->Init();
+		CMapDesc WaterMapDesc = { m_pHeightMap->m_iRow,
+			m_pHeightMap->m_iCol,
+			1.0f, 0.0f,
+			L"../../Resource/water.bmp",
+			L"../../Resource/WaterMap.hlsl" };
+		m_pWaterMap->Load(WaterMapDesc);
+
+
+		m_bLoadHeight = false;
+
+	}
 
 }
 //void MapToolScene::CreateDSS()
@@ -953,7 +1056,7 @@ void MapToolScene::DrawReflectMap(int num ,TMatrix* world, TMatrix* view, TMatri
 	CoreInterface::g_pImmediateContext->PSSetShaderResources(2, 1, pSRV);
 	CoreInterface::g_pImmediateContext->VSSetConstantBuffers(4, 1, m_pFogCB.GetAddressOf());
 	CoreInterface::g_pImmediateContext->PSSetConstantBuffers(4, 1, m_pFogCB.GetAddressOf());
-	if (m_WaterMap.m_WaterEffectRT[num].Begin(TVector4(1, 1, 1, 1)))
+	if (m_pWaterMap->m_WaterEffectRT[num].Begin(TVector4(1, 1, 1, 1)))
 	{
 		m_pQuadTree->m_pMap->SetMatrix(world, view, proj);
 		m_pQuadTree->m_pMap->PreRender();
@@ -984,7 +1087,7 @@ void MapToolScene::DrawReflectMap(int num ,TMatrix* world, TMatrix* view, TMatri
 
 		m_pSkyBox->SetMatrix(world, view, proj);
 		m_pSkyBox->Render();
-		m_WaterMap.m_WaterEffectRT[num].End();
+		m_pWaterMap->m_WaterEffectRT[num].End();
 	}
 
 }

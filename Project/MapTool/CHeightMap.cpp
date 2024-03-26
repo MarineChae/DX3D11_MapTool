@@ -60,56 +60,86 @@ bool CHeightMap::CreateIndexBuffer(std::vector<DWORD> m_TreeIndexList)
 	return true;
 
 }
-bool CHeightMap::CreateHeightMap(std::wstring HeightMapName)
+bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
 {
-
-	
-	
-	HRESULT hr;
-	size_t maxsize = 0;
-	auto ImageObj = std::make_unique<DirectX::ScratchImage>();
-	DirectX::TexMetadata mData;
-
-	hr = DirectX::GetMetadataFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, mData);
-	if (SUCCEEDED(hr))
+	if (!HeightMapName.empty())
 	{
-		hr = DirectX::LoadFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, &mData, *ImageObj);
+		HRESULT hr;
+		size_t maxsize = 0;
+		auto ImageObj = std::make_unique<DirectX::ScratchImage>();
+		DirectX::TexMetadata mData;
+
+		hr = DirectX::GetMetadataFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, mData);
 		if (SUCCEEDED(hr))
 		{
-			
+			hr = DirectX::LoadFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, &mData, *ImageObj);
+			if (SUCCEEDED(hr))
+			{
+
+			}
 		}
+		if (!CheckSquare(mData.width - 1))
+		{
+			mData.width = ResizeMap(mData.width);
+
+		}
+		if (!CheckSquare(mData.height - 1))
+		{
+			mData.height = ResizeMap(mData.height);
+
+		}
+		m_fHeightList.resize(mData.height * mData.width);
+
+		UCHAR* pTexels = (UCHAR*)ImageObj->GetImages()->pixels;
+		PNCT_VERTEX	v;
+		for (UINT row = 0; row < mData.height; row++)
+		{
+			UINT rowStart = row * ImageObj->GetImages()->rowPitch;
+			for (UINT col = 0; col < mData.width; col++)
+			{
+				UINT colStart = col * 4;
+				UINT uRed = pTexels[rowStart + colStart + 0];
+				m_fHeightList[row * mData.width + col] = (float)uRed * 0.3;	/// DWORD이므로 pitch/4	
+			}
+		}
+
+
+		m_iRow = mData.height;
+		m_iCol = mData.width;
+
+
+
 	}
-	if (!CheckSquare(mData.width - 1))
+	else
 	{
-		mData.width = ResizeMap(mData.width);
+		if (!CheckSquare(size - 1))
+		{
+			size = ResizeMap(size);
+
+		}
+		if (!CheckSquare(size - 1))
+		{
+			size = ResizeMap(size);
+
+		}
+		m_fHeightList.resize(size * size);
+
+		PNCT_VERTEX	v;
+		for (UINT row = 0; row < size; row++)
+		{
+			for (UINT col = 0; col < size; col++)
+			{
+				m_fHeightList[row * size + col] = 0;	/// DWORD이므로 pitch/4	
+			}
+		}
+
+
+		m_iRow = size;
+		m_iCol = size;
+
+
 
 	}
-	if (!CheckSquare(mData.height - 1))
-	{
-		mData.height = ResizeMap(mData.height);
-
-	}
-	m_fHeightList.resize(mData.height * mData.width);
-	
-     	UCHAR* pTexels = (UCHAR*)ImageObj->GetImages()->pixels;
-    	PNCT_VERTEX	v;
-    	for (UINT row = 0; row < mData.height; row++)
-    	{
-    		UINT rowStart = row * ImageObj->GetImages()->rowPitch;
-    		for (UINT col = 0; col < mData.width; col++)
-    		{
-    			UINT colStart = col * 4;
-    			UINT uRed = pTexels[rowStart + colStart + 0];
-    			m_fHeightList[row * mData.width + col] = (float)uRed*0.3;	/// DWORD이므로 pitch/4	
-    		}
-    	}
-		
-
-	m_iRow = mData.height;
-	m_iCol = mData.width;
-
-	
-	
 
 	return true;
 }
@@ -160,10 +190,15 @@ int CHeightMap::ResizeMap(int n)
 	return 1;
 
 }
-bool CHeightMap::Init()
+bool CHeightMap::Init(wstring HeightmapName,int size)
 {
+	
 	CMap::Init();
-	CreateHeightMap(L"../../Resource/heightMap513.bmp");
+	if (!HeightmapName.empty())
+		CreateHeightMap(HeightmapName,0);
+	else
+		CreateHeightMap(L"", size);
+
 	m_bStaticLight = true;
 	CMapDesc MapDesc = { m_iCol,  m_iRow,1.0f,0.3f,L"../../Resource/000.jpg",L"../../Resource/MultiTex.hlsl" };
 

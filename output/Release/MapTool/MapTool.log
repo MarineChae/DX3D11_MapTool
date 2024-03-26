@@ -4,23 +4,24 @@ C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp
 C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(163,47): warning C4302: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 잘립니다.
 C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(173,41): warning C4311: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 포인터가 잘립니다.
 C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(173,41): warning C4302: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 잘립니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(241,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(481,48): warning C4838: 'UINT'에서 'int'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(481,76): warning C4838: 'UINT'에서 'int'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(506,11): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(507,11): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(509,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(511,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(522,34): warning C4267: '초기화 중': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(522,23): warning C4267: '초기화 중': 'size_t'에서 'const UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(563,42): warning C4311: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 포인터가 잘립니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(563,42): warning C4302: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 잘립니다.
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(973,75): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(245,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(490,28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(549,48): warning C4838: 'UINT'에서 'int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(549,76): warning C4838: 'UINT'에서 'int'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(575,11): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(576,11): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(578,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(580,23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(591,34): warning C4267: '초기화 중': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(591,23): warning C4267: '초기화 중': 'size_t'에서 'const UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(632,42): warning C4311: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 포인터가 잘립니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(632,42): warning C4302: '형식 캐스트': 'CFbxObj *'에서 'UINT'(으)로 잘립니다.
+C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.cpp(1076,75): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
      ../../output/Release/MapTool.lib 라이브러리 및 ../../output/Release/MapTool.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
-  1 of 8355 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 8359 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    37 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
 CCoreLib.lib(DirectXTexD3D11.obj) : warning LNK4099: '' PDB를 'CCoreLib.lib(DirectXTexD3D11.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
 CCoreLib.lib(DirectXTexImage.obj) : warning LNK4099: '' PDB를 'CCoreLib.lib(DirectXTexImage.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.

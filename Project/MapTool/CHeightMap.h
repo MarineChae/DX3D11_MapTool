@@ -6,7 +6,7 @@ class CHeightMap : public CMap
 public:
 	std::vector<float>		m_fHeightList;
 public:
-	bool CreateHeightMap(std::wstring HeightMapName);
+	bool CreateHeightMap(std::wstring HeightMapName, int size);
 	bool CreateMap(CMapDesc& MapDesc, std::vector<float>HeightList);
 	float GetHeightVertex(UINT index);
 	TVector4 GetColorVertex(UINT index);
@@ -15,6 +15,6 @@ public:
 	bool CheckSquare(int n);
 	int ResizeMap(int n);
 public:
-	bool Init();
+	bool Init(wstring HeightmapName, int size);
 };
 
