@@ -1,1 +1,3 @@
-FBXSDK FMod 라이브러리를 추가해야만 사용가능함
+-FBXSD/lib/release/libfbxsdk-md
+-FBXSD/lib/release/libfbxsdk-mt
+파일 추가시 빌드가능
