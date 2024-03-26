@@ -8,8 +8,10 @@
 ## DirectX11 3D MapTool
   
 DirectX11 을 이용한 맵툴제작
-
-시연 영상 : 추가예정
+* 제작기간 : 2023.12 ~ 2024.02
+ 
+* 시연 영상 : https://www.youtube.com/watch?v=LpMHkSxpFdY
+* 
 * DownloadLink : https://drive.google.com/file/d/1-WgzNXx6OKWGYwIPq4wMHWlw6BUvFI9R/view?usp=drive_link
 ## 조작법
 
