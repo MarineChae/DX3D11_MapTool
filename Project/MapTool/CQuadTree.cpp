@@ -72,24 +72,28 @@ void CQuadTree::UpdateNodeBoundingBox(CNode* pNode, float height)
 }
 void CQuadTree::FindNeighborVertex(CNode* node, Circle circle)
 {
+    //브러쉬에 따라 업브러쉬인지 다운브러쉬인지 
     if (m_BrushType == BrushType::UPBRUSH)
     {
         float newHeight = 0.0f;
         float maxHeight = 0.0f;
+        //선택된 노드의 정점들을 확인하여 피킹된 점을 거리에 따라 높낮이를 다르게
         for (int ivtx = 0; ivtx < node->m_vVertexList.size(); ++ivtx)
         {
             TVector2 center(circle.vCenter.x, circle.vCenter.y);
             TVector2 pt(node->m_vVertexList[ivtx].Pos.x, node->m_vVertexList[ivtx].Pos.z);
             float dist = (center - pt).Length();
-
+            //원의 크기보다 정점의 거리가 멀면 다음 정점으로 넘어간다.
             if (circle.fRadius <= dist)
                 continue;
-           
+           //이대로 사용하면 가까운 점은 0 먼점은 1 이 나오기 때문에 
+           //가까운 곳을 1로 먼 곳을 0으로 만들어준다
             dist = ( dist / circle.fRadius )-1;
             dist *= -1;
-
+            //델타 타임을 사용하여 고정된 값이 상승하게 구현
             node->m_vVertexList[ivtx].Pos.y += dist* g_fSecondPerFrame * m_HeightBrushstrength;
             newHeight = node->m_vVertexList[ivtx].Pos.y;
+            //노드의 바운딩 박스를 새로 계산하기 위해 높이값을 변경
             if (newHeight > maxHeight)
             {
                 maxHeight = newHeight;
@@ -186,6 +190,9 @@ void CQuadTree::FindNeighborVertex(CNode* node, Circle circle)
 }
 void CQuadTree::UpdateVertexAlpha(Circle circle)
 {
+    //피킹 지점으로 부터 원을 만들어 가져온다.
+    //노드에서 각각 정점을 가져오면 중복되는 정점이 생겨 격자가 생기기 때문에
+    //스플래팅을할 노드들을 중복없이 가져와 사용해야한다.
     for (auto idx : m_ChangeAlphaList)
     {
         TVector2 center(circle.vCenter.x, circle.vCenter.y);
@@ -197,7 +204,8 @@ void CQuadTree::UpdateVertexAlpha(Circle circle)
 
         dist = (dist / circle.fRadius) - 1;
         dist *= -1;
-
+        //높이 올리기 때와 마찬가지로 값을 구한 후 맵의 알파맵의 데이터를 가져와
+        //레이어에 맞게 값을 변경시켜준다.
 
         BYTE* pixel = &m_pMap->m_fLookup[idx * 4];
         int brushType = 0;
@@ -220,6 +228,7 @@ void CQuadTree::UpdateVertexAlpha(Circle circle)
         }
 
     }
+    //변경된 값을 셰이더로 넘겨준다.
     UINT const DataSize = sizeof(BYTE) * 4;
     UINT const RowPitch = DataSize * m_Width;
     CoreInterface::g_pImmediateContext->UpdateSubresource(m_pMap->m_pRoughnessLookUpTex.Get(), 0, NULL, m_pMap->m_fLookup, RowPitch, 0);
@@ -782,6 +791,7 @@ bool CQuadTree::Frame(Select* select)
     {
         for (auto node : DrawNodeList)
         {
+
             if (CInput::GetInstance().m_dwKeyState[VK_RBUTTON] == KEY_HOLD && select->GetIntersectionBox(&node->m_Box))
             {
                 cir.vCenter = TVector2(select->m_vIntersection.x, select->m_vIntersection.z);
@@ -791,6 +801,7 @@ bool CQuadTree::Frame(Select* select)
                     if (CCollision::CircleToBox(cir, node2->m_Box))
                     {
                         select->m_vSelectNodeList.insert(node2);
+                        //피킹 지점을 기준으로 원을 그려 높이를 설정
                         FindNeighborVertex(node2, cir);
                         //m_Select.InterpolationNodeHeight();
                         CoreInterface::g_pImmediateContext->UpdateSubresource(node2->m_pVertexBuffer.Get(),

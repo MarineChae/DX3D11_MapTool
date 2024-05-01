@@ -3,25 +3,27 @@
 void RedoUndo::SaveUndoData(std::vector<PNCT_VERTEX> ver, BYTE* pixeldata, map<UINT, shared_ptr<InstanceObject>>objlist)
 {
     TempSaveData temp;
-
+    //정점의 정보를 임시로 저장해 놓을 데이터에 넣어놓는다.
     if (!ver.empty())
     {
         temp.TempVertexList.resize(ver.size());
         std::copy(ver.begin(), ver.end(), temp.TempVertexList.begin());
     }
+    //스플레팅 데이터
     if (pixeldata != NULL)
     {
         int iSize = m_pQuadTree->m_Width * m_pQuadTree->m_Height * 4;
         temp.TempPixelDataList = new BYTE[iSize];
         memcpy_s(temp.TempPixelDataList, iSize, pixeldata, iSize);
     }
- 
+    //오브젝트 데이터
     temp.TempInstanceObjList = objlist;
     for (auto& obj : objlist)
     {
         temp.TempMapObjList.insert(make_pair(obj.second, obj.second->m_InstanceList.first));
         temp.TempInstanceDataList.insert(make_pair(obj.second, obj.second->m_InstanceList.second));
     }
+    //인스턴싱 데이터
     for (auto& inst : temp.TempInstanceObjList)
     {
         for (auto& obj : inst.second->m_InstanceList.first)
@@ -37,7 +39,7 @@ void RedoUndo::SaveUndoData(std::vector<PNCT_VERTEX> ver, BYTE* pixeldata, map<U
         }
        
     }
-
+    //되돌리는 목록에 추가해준다
     m_vUndoList.push_back(temp);
 
 }
@@ -82,11 +84,14 @@ void RedoUndo::SaveRedoData(std::vector<PNCT_VERTEX> ver, BYTE* pixeldata, map<U
 }
 bool RedoUndo::UndoData(std::vector<PNCT_VERTEX>& ver, BYTE* pixeldata, map<UINT, shared_ptr<InstanceObject>>&objlist)
 {
+    //리스트가 비어있다면 실행하지 않는다.
     if (m_vUndoList.empty())
         return false;
+    //작업내용을 취소하기 전에 되돌릴 데이터를 저장해 놓는다.
     SaveRedoData(ver, pixeldata,objlist);
-
+    //리스트의 가장 최신 데이터를 가져온다.
     auto list = m_vUndoList.back();
+    //각각의 정보들을 현재 데이터에 덮어 씌운다.
     if (!list.TempVertexList.empty())
         std::copy(list.TempVertexList.begin(), list.TempVertexList.end(), ver.begin());
     int iSize = m_pQuadTree->m_Width * m_pQuadTree->m_Height * 4;
@@ -136,6 +141,7 @@ bool RedoUndo::UndoData(std::vector<PNCT_VERTEX>& ver, BYTE* pixeldata, map<UINT
         }
     }
 
+    //사용한 임시데이터 들은 삭제해준다.
     if (!list.TempVertexList.empty())
         list.TempVertexList.clear();
     if (list.TempPixelDataList != NULL)

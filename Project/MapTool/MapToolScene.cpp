@@ -105,36 +105,41 @@ bool MapToolScene::Frame()
 	if (m_pQuadTree->m_BrushType == BrushType::OBJECTSELECT)
 	{
 		if (CInput::GetInstance().m_dwKeyState[VK_RBUTTON] == KEY_PUSH)
-		{
+		{	//인스턴싱된 오브젝트를 찾는다
 			for (auto& instobj : m_InstanceObjList)
 			{
 				for (int iobj = 0 ; iobj < instobj.second->m_InstanceList.first.size(); ++iobj)
-				{
+				{	
 					auto& obj = instobj.second->m_InstanceList.first[iobj];
 					for (auto& child : obj->m_vChildList)
 					{
+						//오브젝트의 자식리스트를 순회하며 박스가 클릭되었는지 확인한다.
 						if (m_Select.GetIntersectionBox(&child->m_CollisionBox))
 						{
-
+							//SRT값을 가져오기위해 선택한 오브젝트를 설정해 준다.
 							if (m_SelectInstanceObject != nullptr)
 							{
+								//이전에 선택한 오브젝트가 있는경우 
 								m_SelectInstanceObject->m_bBeforeSelect = false;
 								m_SelectInstanceObject->m_InstanceList.second[m_BeforeKey].Emissive = 0.0f;
 								
 								m_SelectInstanceObject = instobj.second;
 								m_SelectMapObj = obj;
 								m_SelectInstanceObject->m_bBeforeSelect = true;
+								//선택 했는지 시각적으로 보여주기 위해 값을 넣어준다.
 								instobj.second->m_InstanceList.second[iobj].Emissive = 1.0f;
 								m_BeforeKey = iobj;
 							}
 							else
 							{
+								//선택한 오브젝트가 없었던경우
 								m_SelectInstanceObject = instobj.second;
 								m_SelectMapObj = obj;
 								m_SelectInstanceObject->m_bBeforeSelect = true;
 								instobj.second->m_InstanceList.second[iobj].Emissive = 1.0f;
 								m_BeforeKey = iobj;
 							}	
+							//중복해서 선택하는것을 방지하기위해 반복문을 탈출한다.
 							break;
 						}
 					}
@@ -147,25 +152,31 @@ bool MapToolScene::Frame()
 	{
 		for (auto& node : m_pQuadTree->DrawNodeList)
 		{
+			//교점 확인
 			if (CInput::GetInstance().m_dwKeyState[VK_RBUTTON] == KEY_PUSH && m_Select.GetIntersectionBox(&node->m_Box))
 			{
+				//어떤 FBX 오브젝트를 불러올지 선택
 				int currindex = static_cast<int>(m_pQuadTree->m_BrushType) - static_cast<int>(BrushType::OBJECT1);
 				auto obj = std::make_shared<MapObject>();
+				//맵 오브젝트 생성
 				obj->SetMapObj(ObjList[currindex].get(), ObjList[currindex]->m_AnimInfo);
+				//위치를 교점 기준으로 하되 y값은 지형의 최대y값을 기준으로 배치한다
 				obj->m_Transform._41 = m_Select.m_vIntersection.x;
 				obj->m_Transform._42 = node->m_Box.m_Max.y;
 				obj->m_Transform._43 = m_Select.m_vIntersection.z;
+				//오브젝트 리스트를 구분하기 위해 이름이 중복되는지 확인한 후 중보된다면 이름뒤에 #N 을 부여한다
 				obj->m_MapObjName = obj->m_pFbxObj->m_csName;
-
 				m_pQuadTree->CheckDuplicationName(obj->m_MapObjName);
 				m_pQuadTree->m_MapObjList.insert(make_pair(obj->m_MapObjName, obj));
 
+				//인스턴싱을 위해 리스트에서 찾는다
 				auto instanceObj = m_InstanceObjList.find((UINT)ObjList[currindex].get());
+				//인스턴싱 데이터가 없다면 처음 만들어진 오브젝트 이므로 새로 생성해준다.
 				if (instanceObj == m_InstanceObjList.end())
 				{
 					shared_ptr<InstanceObject> instObj = make_shared<InstanceObject>();
 					instObj->m_InstanceList.first.push_back(obj);
-					
+					//인스턴싱에 필요한 데이터를 채워넣는다.
 					INSTANCEDATA data;
 					data.matWorld = obj->m_SRTMat;
 					instObj->m_InstanceList.second.push_back(data);
@@ -174,7 +185,7 @@ bool MapToolScene::Frame()
 				}
 				else
 				{
-					
+					//데이터가 있다면 인스턴싱에 필요한 데이터만 넘겨준다
 					instanceObj->second->m_szName = obj->m_pFbxObj->m_csName;
 					INSTANCEDATA data;
 					data.matWorld = obj->m_SRTMat;
@@ -481,7 +492,7 @@ void MapToolScene::SaveLoad()
 		ImGui::InputFloat("MapSize", &Mapsize);
 		if (ImGui::Button("Conform", ImVec2(60, 30)))
 		{
-
+			//기존의 맵데이터들을 전부 삭제 후 재 생성한다.
 			m_pHeightMap.reset();
 			m_pQuadTree.reset();
 			m_InstanceObjList.clear();
@@ -537,7 +548,9 @@ void MapToolScene::SaveLoad()
 	if (m_bImguiLoad && !filePathName.empty())
 	{
 		m_bImguiLoad = false;
+		//맵 정보를 파일로 부터 불러온다
 		m_SaveLoader.LoadMap(filePathName,m_InstanceObjList);
+		//기존의 맵데이터를 리셋 시키고 로드한 데이터를 기준으로 새로 생성한다.
 		m_pHeightMap.reset();
 		m_pHeightMap = make_shared<CHeightMap>();
 		m_pQuadTree->m_pTexSRV[0].Reset();
@@ -565,7 +578,7 @@ void MapToolScene::SaveLoad()
 	
 	
 		ComPtr<ID3D11Resource> res;
-	
+		//스플레팅 데이터 
 		tex0->GetSRV()->GetResource(res.GetAddressOf());
 		auto scratchImage = make_unique<ScratchImage>();
 		DirectX::CaptureTexture(CoreInterface::g_pDevice.Get(), CoreInterface::g_pImmediateContext.Get(), res.Get(), *scratchImage);
@@ -590,7 +603,7 @@ void MapToolScene::SaveLoad()
 		UINT const DataSize = sizeof(BYTE) * 4;
 		UINT const RowPitch = DataSize * scratchImage->GetMetadata().width;
 		CoreInterface::g_pImmediateContext->UpdateSubresource(m_pQuadTree->m_pMap->m_pRoughnessLookUpTex.Get(), 0, NULL, m_pQuadTree->m_pMap->m_fLookup, RowPitch, 0);
-	
+		// 인스턴싱한 오브젝트의 데이터
 		for (auto& mapObject : m_SaveLoader.m_MapObject)
 		{
 			std::size_t pos = mapObject.first.rfind(L"#");
@@ -637,7 +650,7 @@ void MapToolScene::SaveLoad()
 				}
 			}
 		}
-	
+		//워터맵 생성
 		m_pWaterMap=nullptr;
 		m_pWaterMap = new WaterMap;
 		m_pWaterMap->Init();
@@ -971,7 +984,9 @@ void MapToolScene::SelectMenu()
 					{
 						if (obj == m_SelectMapObj)
 						{
-
+							//인스턴스 리스트의 오브젝트와 선택한 오브젝트가 동일한경우 
+							//벡터는 중간의 값을 삭제하는 경우 속도가 느리기 때문에 
+							//삭제할 데이터와 벡터의 맨 뒤의 데이터를 교체한다.
 							Instance.second->m_InstanceList.first[iobj] = nullptr;
 							Instance.second->m_InstanceList.first[iobj] = Instance.second->m_InstanceList.first[Instance.second->m_InstanceList.first.size()-1];
 							Instance.second->m_InstanceList.first.resize(Instance.second->m_InstanceList.first.size() - 1);
@@ -1049,7 +1064,7 @@ void MapToolScene::SelectMenu()
 
 void MapToolScene::DrawReflectMap(int num ,TMatrix* world, TMatrix* view, TMatrix* proj)
 {
-
+	//렌더타겟에 워터맵을 기준으로 반사한 모습을 그려준다
 	ID3D11ShaderResourceView* const pSRV[1] = { NULL };
 	CoreInterface::g_pImmediateContext->PSSetShaderResources(0, 1, pSRV);
 	CoreInterface::g_pImmediateContext->PSSetShaderResources(1, 1, pSRV);
@@ -1062,7 +1077,7 @@ void MapToolScene::DrawReflectMap(int num ,TMatrix* world, TMatrix* view, TMatri
 		m_pQuadTree->m_pMap->PreRender();
 		UINT Stride = sizeof(TVector3);
 		UINT offset = 0;
-		CoreInterface::g_pImmediateContext->IASetVertexBuffers(1, 1, m_pQuadTree->m_pMap->m_pTangentVB.GetAddressOf(), &Stride, &offset);//p 159참조
+		CoreInterface::g_pImmediateContext->IASetVertexBuffers(1, 1, m_pQuadTree->m_pMap->m_pTangentVB.GetAddressOf(), &Stride, &offset);//p 159????
 		CoreInterface::g_pImmediateContext->PSSetShaderResources(1, 1, m_pQuadTree->m_pTexSRV[0].GetAddressOf());
 		CoreInterface::g_pImmediateContext->PSSetShaderResources(2, 4, m_pQuadTree->m_pTexSRV[1].GetAddressOf());
 		CoreInterface::g_pImmediateContext->PSSetShaderResources(6, 4, m_pQuadTree->m_pNormalMapSRV[0].GetAddressOf());
@@ -1071,14 +1086,14 @@ void MapToolScene::DrawReflectMap(int num ,TMatrix* world, TMatrix* view, TMatri
 			UINT Stride = sizeof(PNCT_VERTEX);
 			UINT offset = 0;
 
-			CoreInterface::g_pImmediateContext->IASetVertexBuffers(0, 1, node->m_pVertexBuffer.GetAddressOf(), &Stride, &offset);//p 159참조
+			CoreInterface::g_pImmediateContext->IASetVertexBuffers(0, 1, node->m_pVertexBuffer.GetAddressOf(), &Stride, &offset);//p 159????
 			CoreInterface::g_pImmediateContext->IASetIndexBuffer(node->m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 			CoreInterface::g_pImmediateContext->DrawIndexed(node->m_vIndexList.size(), 0, 0);
 
 
 		}
 
-
+		//오브젝트와 스카이박스도 그려준다
 		for (auto& inst : m_InstanceObjList)
 		{
 			inst.second->Render(world, view, proj);
