@@ -68,7 +68,7 @@ bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
 		size_t maxsize = 0;
 		auto ImageObj = std::make_unique<DirectX::ScratchImage>();
 		DirectX::TexMetadata mData;
-
+		//높이맵 텍스쳐의 데이터를 가져온다
 		hr = DirectX::GetMetadataFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, mData);
 		if (SUCCEEDED(hr))
 		{
@@ -78,6 +78,7 @@ bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
 
 			}
 		}
+		//정사각형이 아닌경우 강제로 정사각형으로 만들어준다.
 		if (!CheckSquare(mData.width - 1))
 		{
 			mData.width = ResizeMap(mData.width);
@@ -89,7 +90,7 @@ bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
 
 		}
 		m_fHeightList.resize(mData.height * mData.width);
-
+	// 가져온 높이맵의 픽셀 데이터를 가져와 가져온 값을 높이 리스트에 넣어준다.
 		UCHAR* pTexels = (UCHAR*)ImageObj->GetImages()->pixels;
 		PNCT_VERTEX	v;
 		for (UINT row = 0; row < mData.height; row++)
@@ -112,6 +113,7 @@ bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
 	}
 	else
 	{
+		//높이맵이 없는경우 0으로 초기화 해준다
 		if (!CheckSquare(size - 1))
 		{
 			size = ResizeMap(size);

@@ -522,6 +522,95 @@ if (OpenNew)
 <details>
 <summary>HeightMap Load 샘플코드</summary>
 
+```c++
+
+bool CHeightMap::CreateHeightMap(std::wstring HeightMapName,int size)
+{
+	if (!HeightMapName.empty())
+	{
+		HRESULT hr;
+		size_t maxsize = 0;
+		auto ImageObj = std::make_unique<DirectX::ScratchImage>();
+		DirectX::TexMetadata mData;
+		//높이맵 텍스쳐의 데이터를 가져온다
+		hr = DirectX::GetMetadataFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, mData);
+		if (SUCCEEDED(hr))
+		{
+			hr = DirectX::LoadFromWICFile(HeightMapName.c_str(), DirectX::WIC_FLAGS_NONE, &mData, *ImageObj);
+			if (SUCCEEDED(hr))
+			{
+
+			}
+		}
+		//정사각형이 아닌경우 강제로 정사각형으로 만들어준다.
+		if (!CheckSquare(mData.width - 1))
+		{
+			mData.width = ResizeMap(mData.width);
+
+		}
+		if (!CheckSquare(mData.height - 1))
+		{
+			mData.height = ResizeMap(mData.height);
+
+		}
+		m_fHeightList.resize(mData.height * mData.width);
+	// 가져온 높이맵의 픽셀 데이터를 가져와 가져온 값을 높이 리스트에 넣어준다.
+		UCHAR* pTexels = (UCHAR*)ImageObj->GetImages()->pixels;
+		PNCT_VERTEX	v;
+		for (UINT row = 0; row < mData.height; row++)
+		{
+			UINT rowStart = row * ImageObj->GetImages()->rowPitch;
+			for (UINT col = 0; col < mData.width; col++)
+			{
+				UINT colStart = col * 4;
+				UINT uRed = pTexels[rowStart + colStart + 0];
+				m_fHeightList[row * mData.width + col] = (float)uRed * 0.3;	/// DWORD이므로 pitch/4	
+			}
+		}
+
+
+		m_iRow = mData.height;
+		m_iCol = mData.width;
+
+
+
+	}
+	else
+	{
+		//높이맵이 없는경우 0으로 초기화 해준다
+		if (!CheckSquare(size - 1))
+		{
+			size = ResizeMap(size);
+
+		}
+		if (!CheckSquare(size - 1))
+		{
+			size = ResizeMap(size);
+
+		}
+		m_fHeightList.resize(size * size);
+
+		PNCT_VERTEX	v;
+		for (UINT row = 0; row < size; row++)
+		{
+			for (UINT col = 0; col < size; col++)
+			{
+				m_fHeightList[row * size + col] = 0;	/// DWORD이므로 pitch/4	
+			}
+		}
+
+
+		m_iRow = size;
+		m_iCol = size;
+
+
+
+	}
+
+	return true;
+}
+
+```
 
 </details>
 
