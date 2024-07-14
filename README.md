@@ -1,7 +1,9 @@
 ## 실행 시 주의사항
 -FBXSD/lib/release/libfbxsdk-md
-
+    -http://naver.me/5iTgTk9P
+    
 -FBXSD/lib/release/libfbxsdk-mt
+    -http://naver.me/5xjsjyWp
 파일 추가시 빌드가능
 
 -Release 빌드필요
