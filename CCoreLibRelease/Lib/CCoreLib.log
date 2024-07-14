@@ -1,8 +1,73 @@
-﻿  CWindow.cpp
-C:\Users\kgca42_09\Documents\GitHub\CHB-ProjectsReal\CHB Projects\CCoreLib\CWindow.cpp(72,22): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kgca42_09\Documents\GitHub\CHB-ProjectsReal\CHB Projects\CCoreLib\CWindow.cpp(72,38): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
-C:\Users\kgca42_09\Documents\GitHub\CHB-ProjectsReal\CHB Projects\CCoreLib\CWindow.cpp(95,37): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\kgca42_09\Documents\GitHub\CHB-ProjectsReal\CHB Projects\CCoreLib\CWindow.cpp(96,39): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  CCamera.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCamera.cpp(6,27): warning C4244: '=': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCamera.cpp(7,28): warning C4244: '=': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CCollision.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CUtiliy.h(131,20): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCollision.h(104,69): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCollision.h(106,69): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCollision.h(108,69): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CCore.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCore.cpp(284,36): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CCore.cpp(285,37): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CDebugCamera.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(13,39): warning C4244: '+=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(16,46): warning C4244: '-=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(28,36): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(34,37): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(40,37): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(46,37): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(52,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDebugCamera.cpp(58,35): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CDevice.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDevice.cpp(124,61): warning C4244: '=': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDevice.cpp(125,62): warning C4244: '=': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CDxObject.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDxObject.cpp(6,42): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDxObject.cpp(70,21): warning C4312: '형식 캐스트': 'HRESULT'에서 더 큰 'LPCSTR'(으)로의 변환입니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDxObject.cpp(81,34): warning C4267: '=': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDxObject.cpp(135,68): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CDxObject.cpp(140,74): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CFrustum.cpp
+  CInput.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CInput.cpp(15,32): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CInput.cpp(16,32): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  imgui.cpp
+  ImGuiFileDialog.cpp
+  ImGuiManager.cpp
+  ImGuizmo.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx11.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Mymath.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\Mymath.cpp(56,16): warning C4244: 'return': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CObject.cpp
+  컴파일하고 있습니다...
+  CoreInterface.cpp
+  CShaderMgr.cpp
+  CSoundMgr.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CSoundMgr.cpp(10,31): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CSoundMgr.cpp(25,35): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CSoundMgr.cpp(35,27): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+  CTextureMgr.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CTextureMgr.cpp(89,30): warning C4101: 'res' :참조되지 않은 지역 변수입니다.
+  CTimer.cpp
+  CUtiliy.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CUtiliy.h(131,20): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CWindow.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWindow.cpp(72,22): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWindow.cpp(72,38): warning C4838: 'DWORD'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWindow.cpp(95,37): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWindow.cpp(96,39): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CWriter.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWriter.cpp(5,12): warning C4244: '초기화 중': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\CWriter.cpp(129,54): warning C4267: '인수': 'size_t'에서 'UINT32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  RenderTarget.cpp
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\RenderTarget.cpp(9,21): warning C4244: '=': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\CCoreLib\RenderTarget.cpp(10,22): warning C4244: '=': 'UINT'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TMath.cpp
 DirectXTex_debug.lib(BC.obj) : warning LNK4006: "void __cdecl DirectX::D3DXDecodeBC1(union __m128 *,unsigned char const *)" (?D3DXDecodeBC1@DirectX@@YAXPEAT__m128@@PEBE@Z)이(가) DirectXTex.lib(BC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
 DirectXTex_debug.lib(BC.obj) : warning LNK4006: "void __cdecl DirectX::D3DXDecodeBC2(union __m128 *,unsigned char const *)" (?D3DXDecodeBC2@DirectX@@YAXPEAT__m128@@PEBE@Z)이(가) DirectXTex.lib(BC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
 DirectXTex_debug.lib(BC.obj) : warning LNK4006: "void __cdecl DirectX::D3DXDecodeBC3(union __m128 *,unsigned char const *)" (?D3DXDecodeBC3@DirectX@@YAXPEAT__m128@@PEBE@Z)이(가) DirectXTex.lib(BC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
@@ -164,4 +229,4 @@ DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4006: "long __cdecl DirectX
 DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4006: "long __cdecl DirectX::SaveToWICMemory(struct DirectX::Image const *,unsigned __int64,enum DirectX::WIC_FLAGS,struct _GUID const &,class DirectX::Blob &,struct _GUID const *,class std::function<void __cdecl(struct IPropertyBag2 *)>)" (?SaveToWICMemory@DirectX@@YAJPEBUImage@1@_KW4WIC_FLAGS@1@AEBU_GUID@@AEAVBlob@1@PEBU4@V?$function@$$A6AXPEAUIPropertyBag2@@@Z@std@@@Z)이(가) DirectXTex.lib(DirectXTexWIC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
 DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4006: "long __cdecl DirectX::SaveToWICFile(struct DirectX::Image const &,enum DirectX::WIC_FLAGS,struct _GUID const &,wchar_t const *,struct _GUID const *,class std::function<void __cdecl(struct IPropertyBag2 *)>)" (?SaveToWICFile@DirectX@@YAJAEBUImage@1@W4WIC_FLAGS@1@AEBU_GUID@@PEB_WPEBU4@V?$function@$$A6AXPEAUIPropertyBag2@@@Z@std@@@Z)이(가) DirectXTex.lib(DirectXTexWIC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
 DirectXTex_debug.lib(DirectXTexWIC.obj) : warning LNK4006: "long __cdecl DirectX::SaveToWICFile(struct DirectX::Image const *,unsigned __int64,enum DirectX::WIC_FLAGS,struct _GUID const &,wchar_t const *,struct _GUID const *,class std::function<void __cdecl(struct IPropertyBag2 *)>)" (?SaveToWICFile@DirectX@@YAJPEBUImage@1@_KW4WIC_FLAGS@1@AEBU_GUID@@PEB_WPEBU4@V?$function@$$A6AXPEAUIPropertyBag2@@@Z@std@@@Z)이(가) DirectXTex.lib(DirectXTexWIC.obj)에 이미 정의되어 있습니다. 초 정의가 무시됩니다.
-  CCoreLib.vcxproj -> C:\Users\kgca42_09\Documents\GitHub\CHB-ProjectsReal\CCoreLibRelease\CCoreLib.lib
+  CCoreLib.vcxproj -> C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\CCoreLibRelease\CCoreLib.lib

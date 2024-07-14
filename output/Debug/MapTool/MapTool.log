@@ -1,43 +1,45 @@
 ﻿  CFbxExporter.cpp
   InstanceObject.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MyFbxImport.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\InstanceObject.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\MyFbxImport.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   MapToolScene.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MapToolScene.h(2,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CCore.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\MapToolScene.h(2,9): error C1083: 포함 파일을 열 수 없습니다. 'CCore.h': No such file or directory
   MyFbxImport.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MyFbxImport.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\MyFbxImport.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   CHeightMap.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CMap.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CMap.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   CMap.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CMap.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CMap.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   CModelMgr.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MyFbxImport.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\MyFbxImport.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   CNode.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CNode.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CNode.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   CQuadTree.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CNode.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CNode.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   MapLOD.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CNode.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CNode.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   MapObject.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\MyFbxImport.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\MyFbxImport.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   NormalMap.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\NormalMap.h(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\NormalMap.h(2,10): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   ProJectionShadow.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\ProJectionShadow.h(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\ProJectionShadow.h(2,10): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   RedoUndo.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CNode.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\RedoUndo.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CNode.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   Sample.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\Sample.h(2,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CCore.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\Sample.h(2,9): error C1083: 포함 파일을 열 수 없습니다. 'CCore.h': No such file or directory
   SaveLoader.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CNode.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CNode.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   Scene.cpp
   SceneManager.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\SceneManager.h(2,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\SceneManager.h(2,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   Select.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\Select.h(2,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\Select.h(2,9): error C1083: 포함 파일을 열 수 없습니다. 'CDefine.h': No such file or directory
   SkyBox.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\SkyBox.h(2,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\SkyBox.h(2,10): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
   WaterMap.cpp
-C:\Users\kgca42_09\Desktop\학원자료\MapTool\Project\MapTool\CMap.h(3,9): fatal  error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
+C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\Project\MapTool\CMap.h(3,9): error C1083: 포함 파일을 열 수 없습니다. 'CObject.h': No such file or directory
   코드를 생성하고 있습니다...

@@ -1,0 +1,13 @@
+﻿  CCoreLib.vcxproj -> C:\Users\zawc\Desktop\Unity\DX3D11_MapTool\output\Debug\CCoreLib.lib
+  CCamera.h
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+  DirectXTex.inl
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+  지정된 경로를 찾을 수 없습니다.
+          0개 파일이 복사되었습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: "copy "*.h" "..\\..\\CCoreLib\\Header"
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: copy "*.inl" "..\\..\\CCoreLib\\Header"
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: copy  "..\\..\\output\\Debug\\CCoreLib.lib" "..\\..\\CCoreLib\\Lib"
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(166,5): error MSB3073: :VCEnd" 명령이 종료되었습니다(코드: 1).
